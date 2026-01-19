@@ -1,18 +1,19 @@
 package org.example.model;
-import jakarta.persistence.*;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.Instant;
 
-@Entity
+@Document(collection = "payments")
 public class Payment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    String id;
-    String orderId;
-    Double amount;
-    String status;
-    String paymentId;
-    Instant createdAt;
+    private String id;
+    private String orderId;
+    private Double amount;
+    private String status;
+    private String paymentId;
+    private Instant createdAt;
 
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }

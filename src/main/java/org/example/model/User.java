@@ -1,25 +1,22 @@
 package org.example.model;
-import jakarta.annotation.Nullable;
-import jakarta.persistence.*;
 
-@Entity
-@Table(name="users")
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "users")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    String id;
-    String Username;
-    String email;
-
-    @Column(nullable = true)
-    String role;
+    private String id;
+    private String username;
+    private String email;
+    private String role;
 
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 
-    public String getUsername() { return Username; }
-    public void setUsername(String username) { Username = username; }
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
 
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }

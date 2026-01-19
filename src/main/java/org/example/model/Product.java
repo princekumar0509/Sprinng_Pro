@@ -1,15 +1,14 @@
 package org.example.model;
-import jakarta.persistence.*;
 
-@Entity
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "products")
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String name;
-
-    @Column(nullable = true)
     private String description;
     private Double price;
     private Integer stock;

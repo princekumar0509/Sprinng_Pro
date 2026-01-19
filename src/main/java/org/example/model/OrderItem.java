@@ -1,16 +1,17 @@
 package org.example.model;
-import jakarta.persistence.*;
 
-@Entity
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "order_items")
 public class OrderItem {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    String id;
-    String orderId;
-    String productId;
-    Integer quantity;
-    Double price;
+    private String id;
+    private String orderId;
+    private String productId;
+    private Integer quantity;
+    private Double price;
 
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }

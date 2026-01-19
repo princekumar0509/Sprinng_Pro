@@ -19,8 +19,12 @@ public class CartService {
     }
 
     // POST /api/cart/add
-    public CartItem addItemToCart(String userId, String prodcutId, Integer quantity){
-        Optional<CartItem> existingItem = cartRepository.findByUserIdAndItemId(userId, prodcutId);
+    public CartItem addItemToCart(String userId, String productId, Integer quantity){
+        // Validate product exists
+        productRepository.findById(productId)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        Optional<CartItem> existingItem = cartRepository.findByUserIdAndProductId(userId, productId);
 
         if(existingItem.isPresent()){
             CartItem item = existingItem.get();
@@ -30,10 +34,11 @@ public class CartService {
 
         CartItem cartItem = new CartItem();
         cartItem.setUserId(userId);
-        cartItem.setProductId(prodcutId);
+        cartItem.setProductId(productId);
         cartItem.setQuantity(quantity);
         return cartRepository.save(cartItem);
     }
+
 
     // GET /api/cart/
     public List<Map<String, Object>> getUserCart(String userId){

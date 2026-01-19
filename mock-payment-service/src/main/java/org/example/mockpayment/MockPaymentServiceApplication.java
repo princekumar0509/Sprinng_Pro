@@ -1,11 +1,11 @@
-package org.example;
+package org.example.mockpayment;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class EcommerceApplication {
+public class MockPaymentServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(EcommerceApplication.class, args);
+        SpringApplication.run(MockPaymentServiceApplication.class, args);
     }
 }

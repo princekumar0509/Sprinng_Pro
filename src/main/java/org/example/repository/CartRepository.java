@@ -1,18 +1,13 @@
 package org.example.repository;
 
 import org.example.model.CartItem;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface CartRepository extends JpaRepository<CartItem, String> {
-    // Get all items by userId
-    List<CartItem> findByUserId(String id);
-
-    // Get item by userId
-    Optional<CartItem> findByUserIdAndItemId(String userId, String prodcutId);
-
-    // Clear the entire cart
+public interface CartRepository extends MongoRepository<CartItem, String> {
+    List<CartItem> findByUserId(String userId);
+    Optional<CartItem> findByUserIdAndProductId(String userId, String productId);
     void deleteByUserId(String userId);
 }

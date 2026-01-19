@@ -3,9 +3,9 @@ package org.example.service;
 import org.example.model.*;
 import org.example.repository.*;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+
 
 @Service
 public class OrderService {
@@ -27,8 +27,8 @@ public class OrderService {
 
     // POST /api/orders
     // Create order from cart
-    @Transactional
     public Map<String, Object> createOrder(String userId) {
+
 
         List<CartItem> cartItems = cartRepository.findByUserId(userId);
         if (cartItems.isEmpty()) {
@@ -38,6 +38,7 @@ public class OrderService {
         Order order = new Order();
         order.setUserId(userId);
         order.setStatus("CREATED");
+        order.setCreatedAt(java.time.Instant.now());
         order = orderRepository.save(order);
 
         double totalAmount = 0;
@@ -51,6 +52,13 @@ public class OrderService {
             if (product.getStock() < cartItem.getQuantity()) {
                 throw new RuntimeException("Insufficient stock for product: " + product.getName());
             }
+
+            // Create OrderItem
+            OrderItem orderItem = new OrderItem();
+            orderItem.setOrderId(order.getId());
+            orderItem.setProductId(product.getId());
+            orderItem.setQuantity(cartItem.getQuantity());
+            orderItem.setPrice(product.getPrice());
 
             // reduce stock
             product.setStock(product.getStock() - cartItem.getQuantity());
@@ -81,6 +89,7 @@ public class OrderService {
 
         return response;
     }
+
 
     // GET /api/orders/{orderId}
     // Get order details

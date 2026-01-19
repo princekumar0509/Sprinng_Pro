@@ -1,0 +1,6 @@
+server:
+  port: 8081
+
+ecommerce:
+  webhook:
+    url: http://localhost:8080/api/webhooks/payment

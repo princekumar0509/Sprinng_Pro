@@ -1,0 +1,17 @@
+server:
+  port: 8080
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017
+      database: ecommerce
+
+# Mock Payment Service URL
+payment:
+  service:
+    url: http://localhost:8081
+
+
+# pass: yNlIs2oIeHo0sBR7
+# mongodb+srv://divijaa:yNlIs2oIeHo0sBR7@e-commerce-backend.wilqcy8.mongodb.net/?appName=E-Commerce-Backend
